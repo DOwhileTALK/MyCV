@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Selvi Baldzhiev — CV & Portfolio</title>
+  <meta name="description" content="CV and portfolio of Selvi Baldzhiev — Web dev, InfoSec, Back-Office Specialist" />
+<style>
+:root{
+  --bg:#0f1724;
+  --card:#0b1220;
+  --muted:#9aa4b2;
+  --accent:#7c5cff;
+  --glass: rgba(255,255,255,0.04);
+  --glass-2: rgba(255,255,255,0.02);
+  --glass-border: rgba(255,255,255,0.06);
+  --radius:16epx;
+  --ff: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Reset & base */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: var(--ff);
+  background: linear-gradient(180deg, #071025 0%, #081226 60%, #071026 100%);
+  color: #e6eef8;
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 70px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  backdrop-filter: blur(8px);
+  border-right: 1px solid var(--glass-border);
+  transition: width .35s cubic-bezier(.2,.9,.2,1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 8px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 40;
+}
+/* Remove global hover */
+.sidebar:hover {}
+
+/* Desktop only hover */
+@media (min-width: 641px) {
+  .sidebar:hover { width: 260px; }
+  .sidebar:hover ~ main { margin-left: 260px; }
+  .sidebar:hover nav.menu a span.label {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .sidebar:hover .brand-text h1,
+  .sidebar:hover .brand-text p {
+    white-space: normal;
+    overflow: visible;
+  }
+}
+
+/* Brand / logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  
+  padding: 12px;
+  overflow: hidden;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.brand-text h1 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.brand-text p {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+/* Navigation */
+nav.menu {
+  margin-top: 22px;
+  width: 100%;
+}
+nav.menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius);
+  margin: 6px 8px;
+  color: inherit;
+  text-decoration: none;
+  transition: background .18s, transform .18s;
+}
+.icon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: linear-gradient(180deg,var(--glass),transparent);
+  font-size: 18px;
+}
+nav.menu a:hover {
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  transform: translateX(6px);
+}
+nav.menu a span.label {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity .25s, transform .25s;
+}
+.sidebar:hover nav.menu a span.label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Spacer & socials */
+.spacer { flex: 1; }
+.socials {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 6px;
+}
+.btn-ghost {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: var(--radius);
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-ghost:hover {
+  background: var(--glass);
+  transform: translateY(-2px);
+}
+
+
+/* Main content */
+main {
+  margin-left: 100px;
+  flex: 1;
+  padding: 36px;
+  transition: margin-left .35s;
+}
+.sidebar:hover ~ main { margin-left: 260px; }
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Card */
+.card {
+  background: linear-gradient(180deg,var(--card), rgba(255,255,255,0.02));
+  border-radius: var(--radius);
+  padding: 28px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 40px rgba(3,6,14,0.6);
+  transition: transform .25s, box-shadow .25s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 48px rgba(3,6,14,0.7);
+}
+
+/* CV header */
+header.cv-head { display: flex; gap: 20px; align-items: center; }
+.avatar {
+  width: 300px;
+  height: 300px;
+  border-radius: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+.avatar img {
+  width: 250px;
+  height: 250px;
+  border-radius: inherit; /* keep the rounded corners */
+  object-fit: cover;
+}
+@media (max-width: 640px) {
+.avatar img {
+  width: 150px;
+  height: 200px;
+}
+.avatar {
+  width: 150px;
+  height: 200px;
+}
+}
+/* Meta info */
+.meta h2 { margin: 0; font-size: 24px; font-weight: 600; }
+.meta p.role { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.contact { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+.chip {
+  background: var(--glass);
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.02);
+  transition: all .2s;
+}
+.chip:hover { background: var(--glass-2); }
+
+/* Sections */
+.section { margin-top: 24px; }
+.section h3 { margin: 0 0 14px; font-size: 16px; color: #dfe9fb; letter-spacing: 0.5px; text-transform: uppercase; }
+p, li { color: #d9e8ff; line-height: 1.6; font-size: 14px; }
+ul { padding-left: 20px; margin: 8px 0; }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.skill {
+  background: var(--glass-2);
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.02);
+  transition: transform .2s;
+}
+.skill:hover { transform: translateY(-2px); }
+.bar {
+  height: 8px;
+  background: rgba(0,0,0,0.25);
+  border-radius: 8px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.bar > i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg,var(--accent),#5de0d1);
+  width: 60%;
+}
+
+/* Timeline */
+.timeline { display: flex; flex-direction: column; gap: 16px; }
+.item { display: flex; gap: 16px; }
+.item .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+.item .info { flex: 1; }
+.muted { color: var(--muted); font-size: 13px; }
+
+/* Right column */
+aside.profile { position: sticky; top: 28px; height: max-content; }
+.card.small { padding: 20px; }
+.links a { display: block; text-decoration: none; color: var(--accent); margin: 8px 0; transition: color .2s; }
+.links a:hover { color: #5de0d1; }
+
+/* Projects grid */
+.projects { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.project {
+  padding: 14px;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+  border: 1px solid rgba(255,255,255,0.02);
+  transition: transform .2s, box-shadow .2s;
+}
+.project:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+/* Footer */
+footer { margin-top: 24px; color: var(--muted); font-size: 13px; text-align: center; }
+
+/* Responsive */
+@media (max-width: 1000px) { .container { grid-template-columns: 1fr 320px; } }
+@media (max-width: 860px) { .container { grid-template-columns: 1fr; } aside.profile { position: relative; } }
+@media (max-width: 640px) {
+  .sidebar { width: 72px; position: fixed; left: 0; top: 0; bottom: 0; z-index: 60; }
+  main { margin-left: 72px; padding: 18px; }
+  .sidebar:hover {  }
+  .brand h1, .brand p { display: none; }
+  nav.menu a span.label { display: none; }
+  .sidebar .logo-image { width: 40px; height: 40px; }
+}
+@media (max-width: 640px) {
+  /* Lock sidebar width */
+  .sidebar {
+    width: 72px !important;
+    transition: none !important; /* remove smooth expansion */
+  }
+
+  /* Prevent hover from expanding */
+  .sidebar:hover {
+    width: 72px !important;
+  }
+
+  /* Prevent focus class from expanding */
+  .sidebar.focus {
+    width: 72px !important;
+  }
+
+  /* Keep main content aligned */
+  main {
+    margin-left: 72px !important;
+  }
+
+  /* Hide labels and text on mobile */
+  nav.menu a span.label,
+  .brand-text {
+    display: none !important;
+  }
+
+  /* Optionally shrink logo for mobile */
+  .sidebar .logo-image {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+/* Small helpers */
+a.inline { color: inherit; text-decoration: underline; }
+.badge {
+  display: inline-block;
+  padding: 6px 8px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.02);
+  font-size: 13px;
+  transition: all .2s;
+}
+.badge:hover { background: rgba(124,92,255,0.1); }
+</style>
+
+</head>
+<body>
+ <aside class="sidebar" aria-label="Primary navigation">
+  <div class="brand">
+  <div class="logo-fancy">&nbspSB&nbsp</div>
+<style>
+/* Base logo-fancy style */
+.logo-fancy {
+  width: 70px;
+  height: 60px; /* make it a circle by keeping width=height */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 22px;
+  color: #fff;
+  
+  background: linear-gradient(135deg, #7c5cff, #5de0d1); /* subtle gradient */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4), 0 0 15px rgba(124,92,255,0.6);
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+  
+  transform: scale(1); /* normal scale */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  cursor: pointer;
+}
+
+/* Hover / desktop interaction */
+.logo-fancy:hover {
+  transform: rotate(10deg) scale(1.15);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5), 0 0 25px rgba(124,92,255,0.8);
+  background: linear-gradient(135deg, #9c7cff, #4ad1ff); /* brighten on hover */
+}
+
+/* Mobile / small screens adjustments */
+@media (max-width: 640px) {
+  .logo-fancy {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 10px rgba(124,92,255,0.4);
+  }
+
+  .logo-fancy:hover {
+    transform: rotate(5deg) scale(1.05); /* subtler rotation on mobile */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4), 0 0 15px rgba(124,92,255,0.6);
+  }
+}
+</style>
+
+
+  <div class="brand-text">
+    <h1>Selvi Baldzhiev</h1>
+    <p>Computer Science • InfoSec</p>
+  </div>
+</div>
+
+
+
+
+    <nav class="menu" role="navigation" aria-label="Sections">
+      <a href="#summary" title="Summary"><span class="icon">🏷️</span><span class="label">Summary</span></a>
+      <a href="#skills" title="Skills"><span class="icon">🛠️</span><span class="label">Skills</span></a>
+      <a href="#projects" title="Side Projects"><span class="icon">📁</span><span class="label">Side Projects</span></a>
+      <a href="#experience" title="Work History"><span class="icon">💼</span><span class="label">Work History</span></a>
+      <a href="#education" title="Education"><span class="icon">🎓</span><span class="label">Education</span></a>
+   <!--   <a href="#contact" title="Contact"><span class="icon">✉️</span><span class="label">Contact</span></a>-->
+    </nav>
+
+   <!-- <div class="spacer"></div>
+    <div class="socials">
+      <a class="btn-ghost" href="https://github.com/DOwhileTALK" target="_blank" rel="noopener">GitHub — DOwhileTALK</a>
+      <a class="btn-ghost" href="https://dimitrovlaw.bg/" target="_blank" rel="noopener">dimitrovlaw.bg</a>
+      <a class="btn-ghost" href="https://www.bioreimprinting.com/" target="_blank" rel="noopener">bioreimprinting.com</a>
+    </div>-->
+  </aside>
+
+
+  <main>
+    <div class="container">
+      <section class="card" id="summary">
+       <header class="cv-head">
+  <div class="avatar">
+    <img src="IMG_20241006_160417.jpg" alt="Selvi Baldzhiev" />
+  </div>
+  <div class="meta">
+    <h2>Selvi Baldzhiev</h2>
+    <p class="role">Computer Science & Information Security — Web Developer • Back-Office Specialist</p>
+    <div class="contact" style="margin-top:12px">
+      <div class="chip">selviev2001@gmail.com</div>
+      <div class="chip">Sofia, Bulgaria</div>
+    </div>
+  </div>
+</header>
+
+
+        <div class="section">
+          <h3>Summary</h3>
+          <p>
+            I am a responsible professional with a Bachelor's degree in Computer Science and Information Security from the University of Library Studies and Information Technologies (UNIBIT). At 22, I have diverse experience in roles like supermarket associate, sales agent in a call center, and customer service representative for Crocs, where I was promoted to back-office specialist. My technical skills include web development (HTML, CSS, JavaScript, PHP), programming (C#, Python), and Linux server management. I am motivated to apply my skills in a dynamic environment to further my career.
+          </p>
+        </div>
+
+        <div class="section" id="skills">
+          <h3>Skills</h3>
+          <div class="skills">
+            <div class="skill">
+              <strong>Web Development</strong>
+              <div class="muted">Proficient in HTML, CSS, JavaScript, PHP.</div>
+            </div>
+            <div class="skill">
+              <strong>Programming Languages</strong>
+              <div class="muted">Experience with C#, Python.</div>
+            </div>
+            <div class="skill">
+              <strong>Customer Service</strong>
+              <div class="muted">Strong background in customer service and support roles, including promotion to back-office representative.</div>
+            </div>
+            <div class="skill">
+              <strong>Server Management</strong>
+              <div class="muted">Knowledge in Linux server management and configuring Apache and Nginx servers. Experience with Flask apps.</div>
+            </div>
+            <div class="skill">
+              <strong>Problem-Solving</strong>
+              <div class="muted">Adept at identifying and resolving technical issues.</div>
+            </div>
+            <div class="skill">
+              <strong>Communication & Teamwork</strong>
+              <div class="muted">Excellent verbal and written communication skills and proven ability to work effectively in team environments.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section" id="projects">
+          <h3>Side Projects</h3>
+          <div class="projects">
+            <div class="project">
+              <strong>Freelance Websites</strong>
+             <ul>
+        <li>Creating websites using HTML, CSS, JavaScript, and PHP.</li>
+        <li>Setting hosting profiles (Superhosting.bg) and domains for the websites.</li>
+        <li>Website: <a class="inline" href="https://dimitrovlaw.bg/" target="_blank" rel="noopener">dimitrovlaw.bg</a> — Law firm website presenting legal services, practice areas, and contact info.</li>
+        <li>Website: <a class="inline" href="https://www.bioreimprinting.com/" target="_blank" rel="noopener">bioreimprinting.com</a> — Educational platform offering courses and consultations in epigenetics and emotional healing.</li>
+        <li>Website: <a class="inline" href="https://simvolistika.com/" target="_blank" rel="noopener">simvolistika.com</a> — Online store for oracle/mystical card decks and related products.</li>
+        <li>Website: <a class="inline" href="https://stivski.shop/" target="_blank" rel="noopener">stivski.shop</a> — Fashion e-commerce site selling trendy oversize sweatshirts and apparel.</li>
+        <li>Website: <a class="inline" href="https://thebigfunnel.marketing/" target="_blank" rel="noopener">thebigfunnel.marketing</a> — Marketing agency website offering business growth, strategy, and digital marketing services.</li>
+      </ul>
+            </div>
+
+            <div class="project">
+              <strong>University Practice Job, 2021</strong>
+              <ul>
+                <li>Updating site information and optimizing objects in a website using HTML, CSS, JavaScript.</li>
+                <li>Website: <a class="inline" href="https://stainedglass.amateras.eu/" target="_blank" rel="noopener">stainedglass.amateras.eu</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+
+
+ <div class="section" id="experience">
+          <h3>Work History</h3>
+          <div class="timeline">
+            <div class="item">
+              <div class="dot" aria-hidden></div>
+              <div class="info">
+                <strong>Senior Back-Office Specialist — ResultCX (Crocs Inc.)</strong>
+                <div class="muted">06/2025 – Present | Sofia - Remote</div>
+                <ul>
+  <li>Managing and supporting the global back-office team for Crocs, ensuring smooth execution of daily operations and task prioritization across USA/CA, EU, and India regions.</li>
+  <li>Organizing workflows, optimizing CS procedures, and creating internal documentation and manuals to improve efficiency, accuracy, and onboarding speed.</li>
+  <li>Providing advanced support with account access, system login issues, and permissions management for internal tools and platforms.</li>
+  <li>Collaborating closely with cross-functional departments (logistics, finance, fraud, IT, and escalation teams) to resolve complex cases and ensure seamless customer resolutions.</li>
+  <li>Monitoring performance and assisting representatives with escalated cases, while ensuring compliance with internal guidelines and service quality standards.</li>
+  <li>Proactively identifying process gaps and proposing improvements to enhance operational effectiveness and team productivity.</li>
+</ul>
+
+              </div>
+            </div>
+
+
+        <div class="section" id="experience">
+          <h3>Work History</h3>
+          <div class="timeline">
+          <div class="item">
+  <div class="dot" aria-hidden></div>
+  <div class="info">
+    <strong>Back-Office Specialist — ResultCX (Crocs Inc.)</strong>
+    <div class="muted">05/2023 – 06/2025 | Sofia - Remote</div>
+    <ul>
+      <li>Provide comprehensive support to the global back-office team, ensuring accurate and timely resolution of customer issues across multiple regions (USA/CA, EU, India).</li>
+      <li>Analyze data, process refunds, manage payments/orders, and oversee special shipment tasks to optimize operational efficiency.</li>
+      <li>Develop and maintain internal manuals and documentation, improving onboarding and training for new team members.</li>
+      <li>Troubleshoot system errors and provide guidance to colleagues on technical and procedural challenges.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="item">
+  <div class="dot" aria-hidden></div>
+  <div class="info">
+    <strong>Freelance Back-Office Assistant</strong>
+    <div class="muted">03/2023 – 08/2023</div>
+    <ul>
+      <li>Validated and organized candidate information with accuracy, ensuring smooth application processes.</li>
+      <li>Communicated with candidates throughout the recruitment process, maintaining professional and timely follow-ups.</li>
+      <li>Streamlined administrative workflows, improving efficiency for hiring managers.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="item">
+  <div class="dot" aria-hidden></div>
+  <div class="info">
+    <strong>Customer Service Representative — ResultCX (Crocs Inc.)</strong>
+    <div class="muted">06/2022 – 05/2023 | Sofia - Remote</div>
+    <ul>
+      <li>Handled inbound customer inquiries via phone, chat, and email, delivering high-quality support for orders, payments, and refunds.</li>
+      <li>Processed shipments accurately in SAP, ensuring timely delivery and customer satisfaction.</li>
+      <li>Trained new representatives, monitored progress, and provided coaching to enhance team performance.</li>
+      <li>Resolved customer concerns efficiently while maintaining compliance with company policies and procedures.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="item">
+  <div class="dot" aria-hidden></div>
+  <div class="info">
+    <strong>Sales Agent Representative — CMSG Ltd</strong>
+    <div class="muted">02/2022 – 06/2022 | Sofia</div>
+    <ul>
+      <li>Conducted outbound sales calls to potential and existing clients, presenting product offerings and closing sales.</li>
+      <li>Explained Forex platform terms, features, and benefits to clients, ensuring clarity and informed decision-making.</li>
+      <li>Analyzed market trends and prepared reports for management to inform strategic sales decisions.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="item">
+  <div class="dot" aria-hidden></div>
+  <div class="info">
+    <strong>Sales Assistant — Supermarket Fantastico</strong>
+    <div class="muted">05/2019 – 01/2022 | Sofia</div>
+    <ul>
+      <li>Delivered exceptional customer service across multiple departments including cafeteria, prepared food, and checkout areas.</li>
+      <li>Trained and mentored new assistants, tracking their progress and fostering a collaborative team environment.</li>
+      <li>Supported daily operations by executing additional managerial tasks to maintain store efficiency and customer satisfaction.</li>
+    </ul>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+
+        <div class="section" id="education">
+          <h3>Education</h3>
+          <div class="timeline">
+            <div class="item">
+              <div class="dot" aria-hidden></div>
+              <div class="info">
+                <strong>Bachelor's Degree in Information Security</strong>
+                <div class="muted">2020 – 2024 | University of Library Studies and Information Technologies (UNIBIT), Sofia</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="dot" aria-hidden></div>
+              <div class="info">
+                <strong>High School Diploma</strong>
+                <div class="muted">2015 – 2020 | 39th Secondary School "Petar Dinekov", Sofia</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--<footer>
+          <div class="muted">Links: <a class="inline" href="https://github.com/DOwhileTALK" target="_blank">github.com/DOwhileTALK</a> • <a class="inline" href="https://dimitrovlaw.bg/" target="_blank">dimitrovlaw.bg</a> • <a class="inline" href="https://www.bioreimprinting.com/" target="_blank">bioreimprinting.com</a> • <a class="inline" href="https://stainedglass.amateras.eu/" target="_blank">stainedglass.amateras.eu</a></div>
+        </footer>-->
+      </section>
+
+      <aside class="card small profile" aria-label="Profile and contact">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#ffd48f,#ff7aa2);display:flex;align-items:center;justify-content:center;color:#071026;font-weight:700">SB</div>
+          <div>
+            <div style="font-weight:700">Selvi Baldzhiev</div>
+            <div class="muted">Sofia, Bulgaria</div>
+          </div>
+        </div>
+
+        <div style="height:12px"></div>
+        <div class="section">
+          <h3>Contact</h3>
+          <div class="links">
+            <a href="mailto:selviev2001@gmail.com">selviev2001@gmail.com</a>
+            
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Core Tools</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="badge">HTML</span>
+            <span class="badge">CSS</span>
+            <span class="badge">JavaScript</span>
+            <span class="badge">PHP</span>
+            <span class="badge">C#</span>
+            <span class="badge">Python</span>
+            <span class="badge">Linux</span>
+            <span class="badge">Apache</span>
+            <span class="badge">Nginx</span>
+            <span class="badge">Excel</span>
+          </div>
+        </div>
+
+       
+
+
+
+
+<div class="section">
+  <h3>Interests</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:8px">
+    <span class="badge">Music</span>
+    <span class="badge">Web Programming</span>
+    <span class="badge">Server Configuration</span>
+    <span class="badge">Cybersecurity</span>
+  </div>
+</div>
+
+
+        <div class="section">
+          <h3>Availability</h3>
+          <div class="muted">Available for freelance & remote roles. Open to junior to mid-level webdev/back-office positions.</div>
+        </div>
+      </aside>
+<br><br><br><br>
+
+<!-- Back to Top Button -->
+<button id="backToTop" title="Back to Top">↑</button>
+<style>#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  z-index: 100;
+  display: none; /* hidden by default */
+}
+
+#backToTop:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+}
+ </style>
+<script>
+const backToTop = document.getElementById('backToTop');
+
+// Show button after scrolling down 300px
+window.addEventListener('scroll', () => {
+  backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+});
+
+// Smooth scroll to top
+backToTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+<!-- Back to the top-->
+
+    </div>
+  </main>
+
+  <script>
+    // Smooth scrolling for in-page links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault();
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el){
+          el.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      })
+    })
+
+    // Accessibility: allow keyboard to expand sidebar when focused
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.addEventListener('focusin', ()=> sidebar.classList.add('focus'))
+    sidebar.addEventListener('focusout', ()=> sidebar.classList.remove('focus'))
+
+    // Small tweak: close hover expansion on mobile by disabling hover effect
+    const mq = window.matchMedia('(max-width:640px)');
+    function handleMobile(e){
+      if(e.matches){
+       if (window.innerWidth > 640) {
+        sidebar.style.width = '72px';
+
+
+
+      } else {
+        sidebar.style.width = '';
+      }
+    }
+    handleMobile(mq);
+    mq.addListener(handleMobile);
+  </script>
+</body>
+</html>
