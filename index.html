@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Selvi Baldzhiev — CV & Portfolio</title>
   <meta name="description" content="CV and portfolio of Selvi Baldzhiev — Web dev, InfoSec, Back-Office Specialist" />
 <style>
@@ -204,32 +202,30 @@ main {
 /* CV header */
 header.cv-head { display: flex; gap: 20px; align-items: center; }
 .avatar {
-  width: 100%;
-  max-width: 300px; /* desktop max */
-  aspect-ratio: 1; /* keeps square ratio */
+  width: 300px;
+  height: 300px;
   border-radius: 10%;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+ 
 }
-
 .avatar img {
-  width: 100%;
-  height: 100%;
+  width: 250px;
+  height: 250px;
+  border-radius: inherit; /* keep the rounded corners */
   object-fit: cover;
-  border-radius: inherit;
 }
-
 @media (max-width: 640px) {
-  .avatar {
-    max-width: 100px; /* smaller on mobile */
-    aspect-ratio: auto; /* optional for portrait orientation */
-  }
-
-  
+.avatar img {
+  width: 150px;
+  height: 200px;
 }
-
+.avatar {
+  width: 150px;
+  height: 200px;
+}
+}
 /* Meta info */
 .meta h2 { margin: 0; font-size: 24px; font-weight: 600; }
 .meta p.role { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
@@ -784,7 +780,3 @@ backToTop.addEventListener('click', () => {
   </script>
 </body>
 </html>
-
-
-
-
